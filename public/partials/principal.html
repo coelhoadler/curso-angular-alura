@@ -2,17 +2,25 @@
     <h1 class="text-center">Alurapic</h1>
 </div>
 
+<p class="alert alert-info" ng-show="mensagem.length">{{mensagem}}</p>
+
 <div class="row">
     <div class="col-md-12">
         <form>
-            <input class="form-control" placeholder="filtrar" ng-model="filtro" data-ng-model-options="{debounce : 500}" />
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <a class="btn btn-primary" href="fotos/new">Nova Foto</a>
+                </span>
+                <input class="form-control" placeholder="filtrar" ng-model="filtro" data-ng-model-options="{debounce : 500}" />                
+            </div>
         </form>
     </div>
 </div>
 
 <div class="row">
-    <meu-painel class="col-md-2 painel-animado" titulo="{{foto.titulo}}" ng-repeat="foto in fotos | filter: filtro"
-        >
-        <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}" />                
+    <meu-painel class="col-md-2 painel-animado" titulo="{{foto.titulo}}" ng-repeat="foto in fotos | filter: filtro">
+        <uma-foto url="{{foto.url}}" titulo="{{foto.titulo}}"></uma-foto>
+        <a href="fotos/edit/{{foto._id}}" class="btn btn-primary btn-block">Editar</a>
+        <meu-botao-perigo nome="Remover" acao="remover(foto)"></meu-botao-perigo>
     </meu-painel>
 </div>
